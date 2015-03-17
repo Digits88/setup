@@ -8,11 +8,13 @@
     }
   ],
   "require": {
-    "php": ">=5.4.0"
+    "php": ">=5.4.0",
+    "illuminate/contracts": "*"
   },
   "autoload": {
     "psr-4": {
       "AlfredNutileInc\\CoreApp\\SetUp\\": "src/SetUp"
     }
-  }
+  },
+  "minimum-stability": "dev"
 }
