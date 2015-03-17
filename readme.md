@@ -72,3 +72,12 @@ Just add your step to `app/SetUp/SetupCommand.php:93`
         SetupFrontEnd::fire($this);
         SetupServerConfig::fire($this);
 ~~~
+
+
+## RoadMap
+
+  * Plugin steps that are part of the project and not part of this repo.
+  * One command to setup Ec2, RDS etc
+  * S3 setup
+ 
+
