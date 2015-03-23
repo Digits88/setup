@@ -24,6 +24,7 @@ class SetupTesting {
         $run = new self;
         $run->setupConfig($setupCommand);
         $run->setupDb($setupCommand);
+        $run->setupTestCase($setupCommand);
     }
 
     protected function setupConfig(SetupCommand $setupCommand)
@@ -83,5 +84,37 @@ class SetupTesting {
             'prefix'   => '',
         ),
 HEREDOCS;
+    }
+
+    private function setupTestCase($setupCommand)
+    {
+        $contents = file_get_contents(base_path() . '/tests/TestCase.php');
+        $pos = strrpos($contents, "refreshDb");
+        if($pos === false)
+        {
+            $location = strripos($contents, "}");
+            $contents = substr_replace($contents, $this->seedStep(), $location, 1);
+
+            File::put(base_path() . '/tests/TestCase.php', $contents);
+
+            $setupCommand->info("Added Seed Step to the TestCase class");
+        } else {
+            $setupCommand->info("Seed step already in TestCase");
+        }
+    }
+
+    private function seedStep()
+    {
+        return <<<HEREDOC
+
+	public function refreshDb()
+	{
+		copy(base_path() . '/database/stubdb.sqlite', base_path() . '/database/testing.sqlite');
+	}
+
+}
+
+HEREDOC;
+
     }
 }
