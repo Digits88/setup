@@ -48,8 +48,11 @@ This will
   * npm install
 
 
+You can limit what to run like this
 
-From inside of homestead, make sure to add your homestead ssh key to authorized keys.
+~~~
+php artisan core-app:setup reponame --run=SetupServerConfig --run=SetupFrontEnd
+~~~
 
 ## Conventions
 
